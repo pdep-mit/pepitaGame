@@ -1,0 +1,49 @@
+import pepita.*
+import comidas.*
+import wollok.game.*
+
+test "Pepita comienza con 100 de energía" {
+	assert.equals(100, pepita.energia())
+}
+
+test "Pepita come y aumenta su energía" {
+	pepita.come(manzana)
+	assert.equals(180, pepita.energia())
+}
+
+test "Pepita vuela y disminuye su energía" {
+	pepita.vola(10)
+	assert.equals(10, pepita.energia())
+}
+
+test "Pepita no está llena al principio" {
+	assert.notThat(pepita.estaLlena())
+}
+
+test "Pepita come mucho y se llena" {
+	pepita.come(manzana)
+	pepita.come(manzana)
+	assert.that(pepita.estaLlena())
+}
+
+test "Pepita está lista para usarse en Game" {
+	assert.equals(game.origin(), pepita.position())
+	assert.equals("pepita.png", pepita.image())
+}
+
+test "Pepita come mucho y aumenta su tamaño" {
+	pepita.come(manzana)
+	pepita.come(manzana)
+	assert.equals("pepita-grande.png", pepita.image())
+}
+
+test "Pepita se mueve y disminuye su energia" {
+	pepita.irA(game.at(0, 1))
+	assert.equals(91, pepita.energia())
+}
+
+test "Pepita se mueve y actualiza su posicion" {
+	const posicion = game.at(0, 1)
+	pepita.irA(posicion)
+	assert.equals(posicion, pepita.position())
+}

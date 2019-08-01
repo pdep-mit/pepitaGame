@@ -1,0 +1,30 @@
+import pepona.*
+import pepita.*
+import checkpoints.*
+import wollok.game.*
+
+test "Pepona está lista para usarse en Game" {
+	assert.equals("pepona.png", pepona.image())
+}
+
+test "Pepona comienza persiguiendo al entrenador" {
+	assert.equals(entrenador.position().up(1), pepona.position())
+}
+
+test "Pepona persigue a alguien y se posiciona arriba suyo" {
+	pepona.persegui(pepita)
+	assert.equals(pepita.position().up(1), pepona.position())
+}
+
+test "Pepona se mueve cuando a quien persigue lo hace" {
+	pepona.persegui(pepita)
+	pepita.irA(game.at(1, 1))
+	assert.equals(game.at(1, 2), pepona.position())
+}
+
+
+test "Pepona sabe darle un premio a quien persigue" {
+	pepona.persegui(pepita)
+	pepona.darPremio()
+	assert.equals(150, pepita.energia())
+}
