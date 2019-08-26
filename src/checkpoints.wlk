@@ -1,6 +1,6 @@
 import wollok.game.*
 
-object llegada {
+object nido {
 
 	method image() {
 		return "llegada.png"
@@ -10,16 +10,26 @@ object llegada {
 		return game.at(7, 7)
 	}
 
-}
-
-object entrenador {
-
-	method image() {
-		return "entrenador.png"
+	method estaLogrado() {
+		return not game.colliders(self).isEmpty()
 	}
 
-	method position() {
-		return game.at(8, 3)
+}
+
+object hijo {
+
+	var fueAlimentado = false
+
+	method image() {
+		return "pepona.png"
+	}
+
+	method come(comida) {
+		fueAlimentado = true
+	}
+
+	method estaLogrado() {
+		return fueAlimentado
 	}
 
 }
